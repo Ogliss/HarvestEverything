@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ModMetaData>
+    <name>Harvest Everything!</name>
+    <author>Ykara (Updated for 1.1 by Ogliss)</author>
+    <supportedVersions>
+        <li>1.0</li>
+        <li>1.1</li>
+    </supportedVersions>
+    <packageId>Ogliss.Ykara.HarvestEverything</packageId>
+    <description>Lets you harvest every (almost) body part you can think of! (This is an unofficial update to the mod from Tabasco which is an unofficial update to the original mod by Ykara)</description>
+	
+  <loadBefore>
+    <li>Smuffle.HarvestOrgansPostMortem</li>
+  </loadBefore>
+</ModMetaData>
