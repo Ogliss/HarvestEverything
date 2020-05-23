@@ -2,7 +2,7 @@
 <Defs>
 
 	<!--Not used but here to prevent errors for previous versions of game -->
-	<RecipeDef ParentName="SurgeryFlesh">
+	<!--RecipeDef ParentName="SurgeryFlesh">
 		<defName>RemoveCompleteBodyPart</defName>
 		<label>remove part</label>
 		<recipeUsers>
@@ -28,7 +28,7 @@
 				<li>Medicine</li>
 			</categories>
 		</fixedIngredientFilter>
-	</RecipeDef>
+	</RecipeDef-->
 
 	<RecipeDef Abstract="True" Name="SurgeryInstallOrgan" ParentName="SurgeryFlesh">
 		<workerClass>Recipe_InstallNaturalBodyPart</workerClass>
@@ -45,6 +45,7 @@
 		<defName>InstallNaturalStomach</defName>
 		<label>install stomach</label>
 		<description>Install a biological stomach.</description>
+		<descriptionHyperlinks><ThingDef>Stomach</ThingDef></descriptionHyperlinks>
 		<jobString>Installing stomach.</jobString>
 		<ingredients>
 			<li>
@@ -81,6 +82,7 @@
 		<defName>InstallNaturalBrain</defName>
 		<label>install brain</label>
 		<description>Install a biological brain.</description>
+		<descriptionHyperlinks><ThingDef>Brain</ThingDef></descriptionHyperlinks>
 		<jobString>Installing brain.</jobString>
 		<ingredients>
 			<li>
@@ -117,6 +119,7 @@
 		<defName>InstallNaturalJaw</defName>
 		<label>install jaw</label>
 		<description>Install a biological jaw.</description>
+		<descriptionHyperlinks><ThingDef>Jaw</ThingDef></descriptionHyperlinks>
 		<jobString>Installing jaw.</jobString>
 		<ingredients>
 			<li>
@@ -153,6 +156,7 @@
 		<defName>InstallNaturalEye</defName>
 		<label>install eye</label>
 		<description>Install a biological eyeball.</description>
+		<descriptionHyperlinks><ThingDef>Eye</ThingDef></descriptionHyperlinks>
 		<jobString>Installing eyeball.</jobString>
 		<ingredients>
 			<li>
@@ -189,6 +193,7 @@
 		<defName>InstallNaturalNose</defName>
 		<label>install nose</label>
 		<description>Install a biological nose.</description>
+		<descriptionHyperlinks><ThingDef>Nose</ThingDef></descriptionHyperlinks>
 		<jobString>Installing nose.</jobString>
 		<ingredients>
 			<li>
@@ -225,6 +230,7 @@
 		<defName>InstallNaturalEar</defName>
 		<label>install ear</label>
 		<description>Install a biological ear.</description>
+		<descriptionHyperlinks><ThingDef>Ear</ThingDef></descriptionHyperlinks>
 		<jobString>Installing ear.</jobString>
 		<ingredients>
 			<li>
@@ -261,6 +267,7 @@
 		<defName>InstallNaturalArm</defName>
 		<label>install arm</label>
 		<description>Install a biological arm.</description>
+		<descriptionHyperlinks><ThingDef>Arm</ThingDef></descriptionHyperlinks>
 		<jobString>Installing arm.</jobString>
 		<ingredients>
 			<li>
@@ -289,7 +296,7 @@
 			</thingDefs>
 		</fixedIngredientFilter>
 		<appliedOnFixedBodyParts>
-			<li>Arm</li>
+			<li>Shoulder</li>
 		</appliedOnFixedBodyParts>
 	</RecipeDef>
 
@@ -297,6 +304,7 @@
 		<defName>InstallNaturalHand</defName>
 		<label>install hand</label>
 		<description>Install a biological hand.</description>
+		<descriptionHyperlinks><ThingDef>Hand</ThingDef></descriptionHyperlinks>
 		<jobString>Installing hand.</jobString>
 		<ingredients>
 			<li>
@@ -333,6 +341,7 @@
 		<defName>InstallNaturalLeg</defName>
 		<label>install leg</label>
 		<description>Install a biological leg.</description>
+		<descriptionHyperlinks><ThingDef>Leg</ThingDef></descriptionHyperlinks>
 		<jobString>Installing leg.</jobString>
 		<ingredients>
 			<li>
@@ -369,6 +378,7 @@
 		<defName>InstallNaturalFoot</defName>
 		<label>install foot</label>
 		<description>Install a biological foot.</description>
+		<descriptionHyperlinks><ThingDef>Foot</ThingDef></descriptionHyperlinks>
 		<jobString>Installing foot.</jobString>
 		<ingredients>
 			<li>
@@ -400,63 +410,5 @@
 			<li>Foot</li>
 		</appliedOnFixedBodyParts>
 	</RecipeDef>
-
-	<!-- Harvests -->
-
-	<!-- <RecipeDef ParentName="SurgeryFlesh"> -->
-	<!-- <defName>RemoveNaturalFoot</defName> -->
-	<!-- <label>remove foot</label> -->
-	<!-- <description>Remove a natural foot.</description> -->
-	<!-- <workerClass>Recipe_RemoveBodyPart</workerClass> -->
-	<!-- <jobString>Removing body part.</jobString> -->
-	<!-- <workAmount>2000</workAmount> -->
-	<!-- <surgerySuccessChanceFactor>1.2</surgerySuccessChanceFactor> -->
-	<!-- <ingredients> -->
-	<!-- <li> -->
-	<!-- <filter> -->
-	<!-- <categories> -->
-	<!-- <li>Medicine</li> -->
-	<!-- </categories> -->
-	<!-- </filter> -->
-	<!-- <count>1</count> -->
-	<!-- </li> -->
-	<!-- </ingredients> -->
-	<!-- <fixedIngredientFilter> -->
-	<!-- <categories> -->
-	<!-- <li>Medicine</li> -->
-	<!-- </categories> -->
-	<!-- </fixedIngredientFilter> -->
-	<!-- <appliedOnFixedBodyParts> -->
-	<!-- <li>Foot</li> -->
-	<!-- </appliedOnFixedBodyParts> -->
-	<!-- </RecipeDef> -->
-
-	<!-- <RecipeDef ParentName="SurgeryFlesh"> -->
-	<!-- <defName>RemoveNaturalLeg</defName> -->
-	<!-- <label>remove leg</label> -->
-	<!-- <description>Remove a natural leg.</description> -->
-	<!-- <workerClass>Recipe_RemoveBodyPart</workerClass> -->
-	<!-- <jobString>Removing body part.</jobString> -->
-	<!-- <workAmount>2000</workAmount> -->
-	<!-- <surgerySuccessChanceFactor>1.2</surgerySuccessChanceFactor> -->
-	<!-- <ingredients> -->
-	<!-- <li> -->
-	<!-- <filter> -->
-	<!-- <categories> -->
-	<!-- <li>Medicine</li> -->
-	<!-- </categories> -->
-	<!-- </filter> -->
-	<!-- <count>1</count> -->
-	<!-- </li> -->
-	<!-- </ingredients> -->
-	<!-- <fixedIngredientFilter> -->
-	<!-- <categories> -->
-	<!-- <li>Medicine</li> -->
-	<!-- </categories> -->
-	<!-- </fixedIngredientFilter> -->
-	<!-- <appliedOnFixedBodyParts> -->
-	<!-- <li>Leg</li> -->
-	<!-- </appliedOnFixedBodyParts> -->
-	<!-- </RecipeDef> -->
 
 </Defs>

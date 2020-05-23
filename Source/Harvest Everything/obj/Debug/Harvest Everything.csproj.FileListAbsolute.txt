@@ -1,8 +1,8 @@
-C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HarvestEverything\Source\Harvest Everything\obj\Debug\Harvest Everything.csproj.CoreCompileInputs.cache
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HarvestEverything\1.1\Harvest Everything.dll
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HarvestEverything\1.1\Harvest Everything.pdb
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HarvestEverything\Source\Harvest Everything\obj\Debug\Harvest Everything.dll
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HarvestEverything\Source\Harvest Everything\obj\Debug\Harvest Everything.pdb
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HarvestEverything\1.1\Assemblies\Harvest Everything.dll
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HarvestEverything\1.1\Assemblies\Harvest Everything.pdb
-C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HarvestEverything\Source\Harvest Everything\obj\Debug\Harvest Everything.csprojResolveAssemblyReference.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HarvestEverything\Source\Harvest Everything\obj\Debug\Harvest Everything.csprojAssemblyReference.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HarvestEverything\Source\Harvest Everything\obj\Debug\Harvest Everything.csproj.CopyComplete

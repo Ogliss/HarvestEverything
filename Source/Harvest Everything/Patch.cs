@@ -15,9 +15,9 @@ namespace Harvest_Everything
         // Token: 0x06000003 RID: 3 RVA: 0x0000205C File Offset: 0x0000025C Recipe_RemoveHediff
         static Patch()
 		{
-			Harmony harmonyInstance = new Harmony("com.github.ianjazz246.harvest_everything");
+			Harmony harmonyInstance = new Harmony("com.rimwold.ogliss.harvest_everything");
             MethodInfo method = AccessTools.TypeByName("RimWorld.Recipe_RemoveBodyPart").GetMethod("GetPartsToApplyOn");
-            MethodInfo method2 = typeof(Patch).GetMethod("GetPartsPostfix", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
+            MethodInfo method2 = typeof(Patch).GetMethod("RemoveBodyPartGetPartsPostfix", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
             bool flag = method2 == null;
             if (flag)
             {
@@ -26,8 +26,34 @@ namespace Harvest_Everything
             bool flag2 = harmonyInstance.Patch(method, null, new HarmonyMethod(method2)) == null;
             if (flag2)
             {
-                Log.Error("Harvest Everything Harmony patch failed.", false);
+                Log.Error("Harvest Everything Recipe_RemoveBodyPart patch failed.", false);
             }
+            MethodInfo method3 = AccessTools.TypeByName("RimWorld.Recipe_RemoveImplant").GetMethod("GetPartsToApplyOn");
+            MethodInfo method4 = typeof(Patch).GetMethod("RemoveImplantGetPartsPostfix", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
+            bool flag3 = method3 == null;
+            if (flag3)
+            {
+                Log.Error("Postfix is null", false);
+            }
+            bool flag4 = harmonyInstance.Patch(method3, null, new HarmonyMethod(method4)) == null;
+            if (flag4)
+            {
+                Log.Error("Harvest Everything Recipe_RemoveImplant patch failed.", false);
+            }
+            
+            MethodInfo method5 = AccessTools.TypeByName("RimWorld.Recipe_InstallNaturalBodyPart").GetMethod("GetPartsToApplyOn");
+            MethodInfo method6 = typeof(Patch).GetMethod("InstallNaturalBodyPartGetPartsPostfix", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
+            bool flag5 = method5 == null;
+            if (flag5)
+            {
+                Log.Error("Postfix is null", false);
+            }
+            bool flag6 = harmonyInstance.Patch(method5, null, new HarmonyMethod(method6)) == null;
+            if (flag6)
+            {
+                Log.Error("Harvest Everything Recipe_InstallNaturalBodyPart patch failed.", false);
+            }
+            
             harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
         }
 
@@ -40,43 +66,33 @@ namespace Harvest_Everything
 				foreach (BodyPartRecord subChild in Patch.GetAllChildParts(child))
 				{
 					yield return subChild;
-	
 				}
 			}
 			yield break;
 		}
 
-		// Token: 0x06000005 RID: 5 RVA: 0x00002100 File Offset: 0x00000300
-		private static bool IsChildrenClean(Pawn pawn, BodyPartRecord part)
-		{
-			IEnumerable<BodyPartRecord> allChildParts = Patch.GetAllChildParts(part);
-			foreach (BodyPartRecord bodyPartRecord in allChildParts)
+        private static bool IsChildrenClean(Pawn pawn, BodyPartRecord part)
+        {
+            IEnumerable<BodyPartRecord> allChildParts = Patch.GetAllChildParts(part);
+            foreach (BodyPartRecord bodyPartRecord in allChildParts)
             {
-                bool AddedPart = pawn.health.hediffSet.HasDirectlyAddedPartFor(part);
-                bool isClean = MedicalRecipesUtility.IsClean(pawn, bodyPartRecord);
-                bool corePart = part != pawn.RaceProps.body.corePart;
-                bool CanAmp = part.def.canSuggestAmputation;
-                bool injury = pawn.health.hediffSet.hediffs.Any((Hediff d) => !(d is Hediff_Injury) && d.def.isBad && d.Visible && d.Part == part && d.def.spawnThingOnRemoved == null);
-                bool flag = !AddedPart && !isClean && !(corePart && CanAmp && injury);
-
-            //    Log.Message(string.Format("{0}'s {6} on {7}, AddedPart: {1}, isClean: {2}, corePart: {3}, CanAmp: {4}, injury: {5} flag == {8}", pawn.NameShortColored, AddedPart, isClean, corePart, CanAmp, injury, part.def.LabelShortCap, part.LabelShortCap, flag));
+                bool flag = !MedicalRecipesUtility.IsClean(pawn, bodyPartRecord);
                 if (flag)
                 {
                     return false;
-				}
-			}
-			return true;
-		}
+                }
+            }
+            return true;
+        }
 
-        // Token: 0x06000006 RID: 6 RVA: 0x00002168 File Offset: 0x00000368
-        private static IEnumerable<BodyPartRecord> GetPartsPostfix(IEnumerable<BodyPartRecord> __result, Pawn pawn)
+        private static IEnumerable<BodyPartRecord> RemoveBodyPartGetPartsPostfix(IEnumerable<BodyPartRecord> __result, Pawn pawn, RecipeDef recipe)
         {
             foreach (BodyPartRecord part in __result)
             {
                 bool flag = part.def.HasModExtension<ModExtension>() && part.def.GetModExtension<ModExtension>().requireCleanChildrenToRemove;
                 if (flag)
                 {
-                    bool flag2 = !Patch.IsChildrenClean(pawn, part) && !pawn.health.hediffSet.HasDirectlyAddedPartFor(part);
+                    bool flag2 = !Patch.IsChildrenClean(pawn, part);
                     if (flag2)
                     {
                         continue;
@@ -84,6 +100,60 @@ namespace Harvest_Everything
                 }
                 yield return part;
             }
+            yield break;
+        }
+        
+        // Token: 0x06000006 RID: 6 RVA: 0x00002168 File Offset: 0x00000368
+        private static IEnumerable<BodyPartRecord> RemoveImplantGetPartsPostfix(IEnumerable<BodyPartRecord> __result, Pawn pawn)
+        {
+            foreach (BodyPartRecord item in __result)
+            {
+                yield return item;
+            }
+            yield break;
+        }
+
+        // Token: 0x06000006 RID: 6 RVA: 0x00002168 File Offset: 0x00000368
+        private static IEnumerable<BodyPartRecord> InstallNaturalBodyPartGetPartsPostfix(IEnumerable<BodyPartRecord> __result, Pawn pawn, RecipeDef recipe)
+        {
+            foreach (BodyPartRecord part in __result)
+            {
+                bool flag = !Patch.IsChildrenDamaged(pawn, part);
+                if (flag)
+                {
+                    continue;
+                }
+                yield return part;
+            }
+            IEnumerable<BodyPartRecord> notMissingParts = pawn.health.hediffSet.GetNotMissingParts(BodyPartHeight.Undefined, BodyPartDepth.Undefined, null, null).Where(x => x.def.spawnThingOnRemoved != null && recipe.appliedOnFixedBodyParts.Contains(x.def));
+            foreach (BodyPartRecord part in notMissingParts)
+            {
+                bool flag = !Patch.IsChildrenDamaged(pawn, part);
+                if (flag || __result.Contains(part))
+                {
+                    continue;
+                }
+                yield return part;
+            }
+            /*
+            List<BodyPartRecord> applicableParts = null;
+            if (notMissingParts.Any())
+            {
+                foreach (BodyPartRecord part in notMissingParts)
+                {
+                    bool flag = !Patch.IsChildrenDamaged(pawn, part);
+                    if (flag)
+                    {
+                        continue;
+                    }
+                    if (applicableParts.NullOrEmpty() || !applicableParts.Contains(part))
+                    {
+                        applicableParts.Add(part);
+                        yield return part;
+                    }
+                }
+            }
+            */
             /*
             List<Hediff> allHediffs = pawn.health.hediffSet.hediffs.Where(x => x is Hediff_Implant).ToList();
             int num;
@@ -99,10 +169,19 @@ namespace Harvest_Everything
             */
             yield break;
         }
-        
-        // Token: 0x06000007 RID: 7 RVA: 0x0000217F File Offset: 0x0000037F
-        private static void ApplyOnPawnPostfix(Pawn pawn, BodyPartRecord part, List<Thing> ingredients)
-		{
-		}
-	}
+        private static bool IsChildrenDamaged(Pawn pawn, BodyPartRecord part)
+        {
+            IEnumerable<BodyPartRecord> allChildParts = Patch.GetAllChildParts(part);
+            foreach (BodyPartRecord bodyPartRecord in allChildParts)
+            {
+                //    bool flag = !MedicalRecipesUtility.IsClean(pawn, bodyPartRecord);
+                bool flag = pawn.health.hediffSet.PartIsMissing(bodyPartRecord);
+                if (flag)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 }
