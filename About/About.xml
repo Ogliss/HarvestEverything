@@ -12,4 +12,7 @@
   <loadBefore>
     <li>Smuffle.HarvestOrgansPostMortem</li>
   </loadBefore>
+  <loadAfter>
+    <li>TranslucencY.BrainInAJar</li>
+  </loadAfter>
 </ModMetaData>
