@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\HarvestEverything\\Source\\Harvest Everything\\Harvest Everything.csproj": {}
+    "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\HarvestEverything\\1.1\\Source\\Harvest Everything\\Harvest Everything.csproj": {}
   },
   "projects": {
-    "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\HarvestEverything\\Source\\Harvest Everything\\Harvest Everything.csproj": {
+    "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\HarvestEverything\\1.1\\Source\\Harvest Everything\\Harvest Everything.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\HarvestEverything\\Source\\Harvest Everything\\Harvest Everything.csproj",
+        "projectUniqueName": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\HarvestEverything\\1.1\\Source\\Harvest Everything\\Harvest Everything.csproj",
         "projectName": "Harvest Everything",
-        "projectPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\HarvestEverything\\Source\\Harvest Everything\\Harvest Everything.csproj",
+        "projectPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\HarvestEverything\\1.1\\Source\\Harvest Everything\\Harvest Everything.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\HarvestEverything\\Source\\Harvest Everything\\obj\\",
+        "outputPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\HarvestEverything\\1.1\\Source\\Harvest Everything\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
@@ -40,11 +40,11 @@
           "dependencies": {
             "Krafs.Rimworld.Ref": {
               "target": "Package",
-              "version": "[1.1.2624, )"
+              "version": "[1.1.2647, )"
             },
             "Lib.Harmony": {
               "target": "Package",
-              "version": "[2.0.0.6, )"
+              "version": "[2.0.1, )"
             }
           }
         }

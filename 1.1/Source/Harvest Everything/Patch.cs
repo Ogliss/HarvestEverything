@@ -5,56 +5,68 @@ using System.Reflection;
 using HarmonyLib;
 using RimWorld;
 using Verse;
+using UnityEngine;
+
 
 namespace Harvest_Everything
 {
 	// Token: 0x02000004 RID: 4
 	[StaticConstructorOnStartup]
-	class Patch
-	{
+	class HarmonyPatches
+    {
+        public static bool enabled_QuestionableEthics;
         // Token: 0x06000003 RID: 3 RVA: 0x0000205C File Offset: 0x0000025C Recipe_RemoveHediff
-        static Patch()
-		{
-			Harmony harmonyInstance = new Harmony("com.rimwold.ogliss.harvest_everything");
+        static HarmonyPatches()
+        {
+            enabled_QuestionableEthics = ModsConfig.ActiveModsInLoadOrder.Any((ModMetaData m) => m.PackageIdPlayerFacing == "kongmd.qee");
+            Harmony harmony = new Harmony("com.rimwold.ogliss.harvest_everything");
             MethodInfo method = AccessTools.TypeByName("RimWorld.Recipe_RemoveBodyPart").GetMethod("GetPartsToApplyOn");
-            MethodInfo method2 = typeof(Patch).GetMethod("RemoveBodyPartGetPartsPostfix", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
+            MethodInfo method2 = typeof(HarmonyPatches).GetMethod("RemoveBodyPartGetPartsPostfix", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
             bool flag = method2 == null;
             if (flag)
             {
-                Log.Error("Postfix is null", false);
+                Log.Error("RemoveBodyPart Postfix is null", false);
             }
-            bool flag2 = harmonyInstance.Patch(method, null, new HarmonyMethod(method2)) == null;
+            bool flag2 = harmony.Patch(method, null, new HarmonyMethod(method2)) == null;
             if (flag2)
             {
-                Log.Error("Harvest Everything Recipe_RemoveBodyPart patch failed.", false);
+                Log.Error("Harvest Everything RemoveBodyPart patch failed.", false);
             }
             MethodInfo method3 = AccessTools.TypeByName("RimWorld.Recipe_RemoveImplant").GetMethod("GetPartsToApplyOn");
-            MethodInfo method4 = typeof(Patch).GetMethod("RemoveImplantGetPartsPostfix", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
+            MethodInfo method4 = typeof(HarmonyPatches).GetMethod("RemoveImplantGetPartsPostfix", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
             bool flag3 = method3 == null;
             if (flag3)
             {
-                Log.Error("Postfix is null", false);
+                Log.Error("RemoveImplant Postfix is null", false);
             }
-            bool flag4 = harmonyInstance.Patch(method3, null, new HarmonyMethod(method4)) == null;
+            bool flag4 = harmony.Patch(method3, null, new HarmonyMethod(method4)) == null;
             if (flag4)
             {
-                Log.Error("Harvest Everything Recipe_RemoveImplant patch failed.", false);
+                Log.Error("Harvest Everything RemoveImplant patch failed.", false);
             }
-            
-            MethodInfo method5 = AccessTools.TypeByName("RimWorld.Recipe_InstallNaturalBodyPart").GetMethod("GetPartsToApplyOn");
-            MethodInfo method6 = typeof(Patch).GetMethod("InstallNaturalBodyPartGetPartsPostfix", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
-            bool flag5 = method5 == null;
-            if (flag5)
+
+            if (!enabled_QuestionableEthics)
             {
-                Log.Error("Postfix is null", false);
+                MethodInfo method5 = AccessTools.TypeByName("RimWorld.Recipe_InstallNaturalBodyPart").GetMethod("GetPartsToApplyOn");
+                MethodInfo method6 = typeof(HarmonyPatches).GetMethod("InstallNaturalBodyPartGetPartsPostfix", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
+                bool flag5 = method5 == null;
+                if (flag5)
+                {
+                    Log.Error("InstallNaturalBodyPart Postfix is null", false);
+                }
+                bool flag6 = harmony.Patch(method5, null, new HarmonyMethod(method6)) == null;
+                if (flag6)
+                {
+                    Log.Error("Harvest Everything InstallNaturalBodyPart patch failed.", false);
+                }
+
             }
-            bool flag6 = harmonyInstance.Patch(method5, null, new HarmonyMethod(method6)) == null;
-            if (flag6)
+            else
             {
-                Log.Error("Harvest Everything Recipe_InstallNaturalBodyPart patch failed.", false);
+                Log.Message("QEE deteched");
             }
-            
-            harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
+            harmony.PatchAll(Assembly.GetExecutingAssembly());
+            if (Prefs.DevMode) Log.Message(string.Format("Harvest Everything: successfully completed {0} harmony patches.", harmony.GetPatchedMethods().Select(new Func<MethodBase, Patches>(Harmony.GetPatchInfo)).SelectMany((Patches p) => p.Prefixes.Concat(p.Postfixes).Concat(p.Transpilers)).Count((Patch p) => p.owner.Contains(harmony.Id))), false);
         }
 
 		// Token: 0x06000004 RID: 4 RVA: 0x000020EE File Offset: 0x000002EE
@@ -63,7 +75,7 @@ namespace Harvest_Everything
 			yield return part;
 			foreach (BodyPartRecord child in part.parts)
 			{
-				foreach (BodyPartRecord subChild in Patch.GetAllChildParts(child))
+				foreach (BodyPartRecord subChild in HarmonyPatches.GetAllChildParts(child))
 				{
 					yield return subChild;
 				}
@@ -73,7 +85,7 @@ namespace Harvest_Everything
 
         private static bool IsChildrenClean(Pawn pawn, BodyPartRecord part)
         {
-            IEnumerable<BodyPartRecord> allChildParts = Patch.GetAllChildParts(part);
+            IEnumerable<BodyPartRecord> allChildParts = HarmonyPatches.GetAllChildParts(part);
             foreach (BodyPartRecord bodyPartRecord in allChildParts)
             {
                 bool flag = !MedicalRecipesUtility.IsClean(pawn, bodyPartRecord);
@@ -92,7 +104,7 @@ namespace Harvest_Everything
                 bool flag = part.def.HasModExtension<ModExtension>() && part.def.GetModExtension<ModExtension>().requireCleanChildrenToRemove;
                 if (flag)
                 {
-                    bool flag2 = !Patch.IsChildrenClean(pawn, part);
+                    bool flag2 = !HarmonyPatches.IsChildrenClean(pawn, part);
                     if (flag2)
                     {
                         continue;
@@ -118,17 +130,19 @@ namespace Harvest_Everything
         {
             foreach (BodyPartRecord part in __result)
             {
-                bool flag = !Patch.IsChildrenDamaged(pawn, part);
+                bool flag = !HarmonyPatches.IsChildrenDamaged(pawn, part);
                 if (flag)
                 {
                     continue;
                 }
                 yield return part;
             }
+
+
             IEnumerable<BodyPartRecord> notMissingParts = pawn.health.hediffSet.GetNotMissingParts(BodyPartHeight.Undefined, BodyPartDepth.Undefined, null, null).Where(x => x.def.spawnThingOnRemoved != null && recipe.appliedOnFixedBodyParts.Contains(x.def));
             foreach (BodyPartRecord part in notMissingParts)
             {
-                bool flag = !Patch.IsChildrenDamaged(pawn, part);
+                bool flag = !HarmonyPatches.IsChildrenDamaged(pawn, part);
                 if (flag || __result.Contains(part))
                 {
                     continue;
@@ -171,7 +185,7 @@ namespace Harvest_Everything
         }
         private static bool IsChildrenDamaged(Pawn pawn, BodyPartRecord part)
         {
-            IEnumerable<BodyPartRecord> allChildParts = Patch.GetAllChildParts(part);
+            IEnumerable<BodyPartRecord> allChildParts = HarmonyPatches.GetAllChildParts(part);
             foreach (BodyPartRecord bodyPartRecord in allChildParts)
             {
                 //    bool flag = !MedicalRecipesUtility.IsClean(pawn, bodyPartRecord);

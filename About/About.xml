@@ -13,6 +13,8 @@
     <li>Smuffle.HarvestOrgansPostMortem</li>
   </loadBefore>
   <loadAfter>
+    <li>fluffy.thebirdsandthebees</li>
+    <li>Rah.RBSE</li>
     <li>TranslucencY.BrainInAJar</li>
   </loadAfter>
 </ModMetaData>
