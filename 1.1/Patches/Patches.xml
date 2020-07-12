@@ -1518,6 +1518,116 @@
     <success>Always</success>
     <operations>
 		<li Class="PatchOperationConditional">
+			<xpath>/Defs/BodyPartDef[defName="Spine"]/spawnThingOnRemoved</xpath>
+			<!--success>Always</success-->
+			
+			<match Class="PatchOperationAdd">
+				<success>Always</success>
+				<xpath>/Defs/BodyPartDef[defName="Spine"]</xpath>
+				<value>
+				  <modExtensions>
+					<li Class="Harvest_Everything.ModExtension">
+					  <requireCleanChildrenToRemove>true</requireCleanChildrenToRemove>
+					</li>
+				  </modExtensions>
+				</value>
+			</match>
+			
+			<nomatch Class="PatchOperationAdd">
+				<xpath>/Defs/BodyPartDef[defName="Spine"]</xpath>
+				<value>
+				  <spawnThingOnRemoved>Spine</spawnThingOnRemoved>
+				  <modExtensions>
+					<li Class="Harvest_Everything.ModExtension">
+					  <requireCleanChildrenToRemove>true</requireCleanChildrenToRemove>
+					</li>
+				  </modExtensions>
+
+				</value>
+			</nomatch>
+		</li>
+		<li Class="PatchOperationConditional">
+			<xpath>/Defs/ThingDef[defName="Spine"]</xpath>
+			<!--success>Always</success-->
+			<nomatch Class="PatchOperationAdd">
+				<xpath>/Defs</xpath>
+				<value>
+					<ThingDef ParentName="BodyPartNaturalBase">
+						<defName>Spine</defName>
+						<label>Spine</label>
+						<description>A biological human spine. Required for walking and standing.</description>
+						<statBases>
+							<MarketValue>750</MarketValue>
+							<Mass>2</Mass>
+						</statBases>
+					</ThingDef>
+				</value>
+			</nomatch>
+		</li>
+		<!--
+		<li Class="PatchOperationFindMod">
+			<mods>
+				<li>Rah's Bionics and Surgery Expansion</li>
+			</mods>
+			<match Class="PatchOperationConditional">
+				<xpath>/Defs/ThingDef[defName="Stomach"]/comps/li[Class="CompProperties_Rottable"]</xpath>
+				<success>Always</success>
+				<nomatch Class="PatchOperationSequence">
+					<operations>
+						<li Class="PatchOperationConditional">
+							<xpath>/Defs/ThingDef[defName="Stomach"]/comps</xpath>
+							<success>Always</success>
+								<match Class="PatchOperationAdd">
+									<success>Always</success>
+									<xpath>/Defs/ThingDef[defName="Stomach"]/comps</xpath>
+									<value>
+									  <li Class="CompProperties_Rottable">
+										<daysToRotStart>0.6</daysToRotStart>
+										<rotDestroys>true</rotDestroys>
+									  </li>
+									</value>
+								</match>
+								<nomatch Class="PatchOperationAdd">
+									<xpath>/Defs/ThingDef[defName="Stomach"]</xpath>
+									<value>
+										<comps>
+										  <li Class="CompProperties_Rottable">
+											<daysToRotStart>0.6</daysToRotStart>
+											<rotDestroys>true</rotDestroys>
+										  </li>
+										</comps>
+									</value>
+								</nomatch>
+						</li>
+						<li Class="PatchOperationConditional">
+							<xpath>/Defs/ThingDef[defName="Stomach"]/tickerType</xpath>
+							<success>Always</success>
+								<match Class="PatchOperationReplace">
+									<success>Always</success>
+									<xpath>/Defs/ThingDef[defName="Stomach"]/tickerType</xpath>
+									<value>
+										<tickerType>Rare</tickerType>
+									</value>
+								</match>
+								<nomatch Class="PatchOperationAdd">
+									<xpath>/Defs/ThingDef[defName="Stomach"]</xpath>
+									<value>
+										<tickerType>Rare</tickerType>
+									</value>
+								</nomatch>
+						</li>
+					</operations>
+				</nomatch>
+			</match>
+		</li>
+		-->
+    </operations>
+  </Operation>
+
+  <Operation Class="PatchOperationSequence">
+    <success>Always</success>
+    <operations>
+		<li Class="PatchOperationConditional">
 			<xpath>/Defs/BodyPartDef[defName="Eye"]/spawnThingOnRemoved</xpath>
 			<!--success>Always</success-->
 			

@@ -101,10 +101,14 @@ namespace Harvest_Everything
         {
             foreach (BodyPartRecord part in __result)
             {
+                if (part.def == BodyPartDefOf.Arm)
+                {
+                    continue;
+                }
                 bool flag = part.def.HasModExtension<ModExtension>() && part.def.GetModExtension<ModExtension>().requireCleanChildrenToRemove;
                 if (flag)
                 {
-                    bool flag2 = !HarmonyPatches.IsChildrenClean(pawn, part);
+                    bool flag2 = !HarmonyPatches.IsChildrenClean(pawn, part) && !pawn.health.hediffSet.hediffs.Any(x=> x.Part == part && x.def == HediffDefOf.WoundInfection);
                     if (flag2)
                     {
                         continue;
