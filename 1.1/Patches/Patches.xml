@@ -239,6 +239,116 @@
 					</RecipeDef>
 
 				   <HediffDef ParentName="addedPartPropsBase">
+					  <defName>Spine</defName>
+					  <label>Spine transplant</label>
+					  <description>A transplanted Spine.</description>
+					  <lethalSeverity>1</lethalSeverity>
+					  <minSeverity>0.001</minSeverity>
+					  <tendable>true</tendable>
+					  <spawnThingOnRemoved>Spine</spawnThingOnRemoved>
+					  <comps>
+					  <li Class="HediffCompProperties_TendDuration">
+						<baseTendDurationHours>96</baseTendDurationHours>
+						<severityPerDayTended>-0.8</severityPerDayTended>
+					  </li>
+					  <li Class="HediffCompProperties_Immunizable">
+						<severityPerDayNotImmune>0.3</severityPerDayNotImmune>
+					  </li>
+					</comps>
+					  <addedPartProps>
+						 <solid>true</solid>
+						 <partEfficiency>1.0</partEfficiency>
+					  </addedPartProps>
+					  <stages>
+					  <li>
+						<label>mild rejection</label>
+								<partEfficiencyOffset>-0.05</partEfficiencyOffset>
+					  </li>
+					  <li>
+						<label>moderate rejection</label>
+						<minSeverity>0.3</minSeverity>
+								<partEfficiencyOffset>-0.3</partEfficiencyOffset>
+								<vomitMtbDays>1</vomitMtbDays>
+								<painOffset>0.15</painOffset>
+								<capMods>
+							<li>
+							   <capacity>Consciousness</capacity>
+							   <offset>-0.2</offset>
+							</li>
+						 </capMods>
+					  </li>
+					  <li>
+						<label>serious rejection</label>
+						<minSeverity>0.6</minSeverity>
+								<partEfficiencyOffset>-0.5</partEfficiencyOffset>
+								<vomitMtbDays>1</vomitMtbDays>
+								<painOffset>0.25</painOffset>
+								<capMods>
+							<li>
+							   <capacity>Consciousness</capacity>
+							   <offset>-0.4</offset>
+							</li>
+						 </capMods>
+					  </li>
+					  <li>
+						<label>deadly rejection</label>
+						<minSeverity>0.8</minSeverity>
+								<partEfficiencyOffset>-0.7</partEfficiencyOffset>
+								<vomitMtbDays>1</vomitMtbDays>
+								<painOffset>0.4</painOffset>
+								<capMods>
+							<li>
+							   <capacity>Consciousness</capacity>
+							   <offset>-0.6</offset>
+							</li>
+						 </capMods>
+					  </li>
+					</stages>
+				   </HediffDef>
+				   
+					<RecipeDef ParentName="SurgeryInstallBodyPartNaturalBase">
+						<defName>InstallNaturalSpine</defName>
+						<label>install spine</label>
+						<description>Installs spine.</description>
+						<descriptionHyperlinks><ThingDef>Spine</ThingDef></descriptionHyperlinks>
+						<workerClass>Recipe_InstallArtificialBodyPart</workerClass>
+						<jobString>Installing spine.</jobString>
+						<deathOnFailedSurgeryChance>0.2</deathOnFailedSurgeryChance>
+						<workAmount>4000</workAmount>
+						<ingredients>
+							<li>
+								<filter>
+									<categories>
+										<li>Medicine</li>
+									</categories>
+								</filter>
+								<count>3</count>
+							</li>
+							<li>
+								<filter>
+									<thingDefs>
+										<li>Spine</li>
+									</thingDefs>
+								</filter>
+								<count>1</count>
+							</li>
+						</ingredients>
+						<fixedIngredientFilter>
+							<categories>
+								<li>Medicine</li>
+							</categories>
+							<thingDefs>
+								<li>Spine</li>
+							</thingDefs>
+						</fixedIngredientFilter>
+						<appliedOnFixedBodyParts>
+							<li>Spine</li>
+						</appliedOnFixedBodyParts>
+						<addsHediff>Spine</addsHediff>
+						 <researchPrerequisite>OrganTransplantation</researchPrerequisite>
+					</RecipeDef>
+
+				   <HediffDef ParentName="addedPartPropsBase">
 					  <defName>Eye</defName>
 					  <label>Eye transplant</label>
 					  <description>A transplanted Eye.</description>
@@ -1138,6 +1248,43 @@
 		</fixedIngredientFilter>
 		<appliedOnFixedBodyParts>
 			<li>Jaw</li>
+		</appliedOnFixedBodyParts>
+	</RecipeDef>
+
+	<RecipeDef ParentName="SurgeryInstallOrgan">
+		<defName>InstallNaturalSpine</defName>
+		<label>install spine</label>
+		<description>Install a biological spine.</description>
+		<descriptionHyperlinks><ThingDef>Spine</ThingDef></descriptionHyperlinks>
+		<jobString>Installing spine.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>Medicine</li>
+					</categories>
+				</filter>
+				<count>4</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Spine</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>Medicine</li>
+			</categories>
+			<thingDefs>
+				<li>Spine</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<appliedOnFixedBodyParts>
+			<li>Spine</li>
 		</appliedOnFixedBodyParts>
 	</RecipeDef>
 

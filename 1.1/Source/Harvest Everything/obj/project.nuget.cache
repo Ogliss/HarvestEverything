@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "CDgN18xO6ZlXw6aCz+hgkTftpSFV1RAbFfushHgOJrGA7F2NKUMQQ5ismf/UnZIIUOsHXlbWMH8r9owhoxq8/A==",
+  "success": true,
+  "projectFilePath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\HarvestEverything\\1.1\\Source\\Harvest Everything\\Harvest Everything.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\User\\.nuget\\packages\\krafs.rimworld.ref\\1.1.2647\\krafs.rimworld.ref.1.1.2647.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\lib.harmony\\2.0.1\\lib.harmony.2.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -37,8 +37,14 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="HEMod.cs.bak" />
+    <None Include="Settings.cs.bak" />
+    <None Include="SettingsHelper.cs.bak" />
+    <Compile Include="Harmony\Patches\Recipe_InstallNaturalBodyPart_GetPartsToApplyOn_Patch.cs" />
+    <Compile Include="Harmony\Patches\Recipe_RemoveImplant_GetPartsToApplyOn_Patch.cs" />
+    <Compile Include="Harmony\Patches\Recipe_RemoveBodyPart_GetPartsToApplyOn_Patch.cs" />
     <Compile Include="ModExtension.cs" />
-    <Compile Include="Patch.cs" />
+    <Compile Include="Harmony\HarmonyPatches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
