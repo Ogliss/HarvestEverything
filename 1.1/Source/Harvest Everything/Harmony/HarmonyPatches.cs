@@ -18,6 +18,7 @@ namespace Harvest_Everything
         // Token: 0x06000003 RID: 3 RVA: 0x0000205C File Offset: 0x0000025C Recipe_RemoveHediff
         static HarmonyPatches()
         {
+            
             enabled_QuestionableEthics = ModsConfig.ActiveModsInLoadOrder.Any((ModMetaData m) => m.PackageIdPlayerFacing == "kongmd.qee");
             Harmony harmony = new Harmony("com.rimwold.ogliss.harvest_everything");
             MethodInfo method = AccessTools.TypeByName("RimWorld.Recipe_RemoveBodyPart").GetMethod("GetPartsToApplyOn");
@@ -79,7 +80,6 @@ namespace Harvest_Everything
             return false;
         }
 
-        // Token: 0x06000004 RID: 4 RVA: 0x000020EE File Offset: 0x000002EE
         public static IEnumerable<BodyPartRecord> GetAllChildParts(BodyPartRecord part)
 		{
 			yield return part;
@@ -98,12 +98,6 @@ namespace Harvest_Everything
             IEnumerable<BodyPartRecord> allChildParts = HarmonyPatches.GetAllChildParts(part);
             foreach (BodyPartRecord bodyPartRecord in allChildParts)
             {
-                /*
-                if (HasAmputateableFor(pawn, bodyPartRecord))
-                {
-                    return true;
-                }
-                */
                 if (!MedicalRecipesUtility.IsClean(pawn, bodyPartRecord))
                 {
                     return false;
@@ -115,11 +109,13 @@ namespace Harvest_Everything
         public static bool IsChildrenDamaged(Pawn pawn, BodyPartRecord part)
         {
             IEnumerable<BodyPartRecord> allChildParts = HarmonyPatches.GetAllChildParts(part);
+        //    Log.Message("Checking "+pawn+"'s "+part+"'s "+allChildParts.Count()+" children");
             foreach (BodyPartRecord bodyPartRecord in allChildParts)
             {
-                //    bool flag = !MedicalRecipesUtility.IsClean(pawn, bodyPartRecord);
+            //    Log.Message("Checking "+ bodyPartRecord);
                 if (pawn.health.hediffSet.PartIsMissing(bodyPartRecord) || !IsClean(pawn, bodyPartRecord))
                 {
+                //    Log.Message(bodyPartRecord +" is damaged!");
                     return true;
                 }
             }
@@ -149,12 +145,6 @@ namespace Harvest_Everything
                 {
                     return true && pawn.health.hediffSet.hediffs[i].Part.def.spawnThingOnRemoved != null;
                 }
-                /*
-                if (pawn.health.hediffSet.hediffs[i].Part == part && pawn.health.hediffSet.hediffs[i] is Hediff_Implant)
-                {
-                    return true && pawn.health.hediffSet.hediffs[i].Part.def.spawnThingOnRemoved != null;
-                }
-                */
             }
             return false;
         }

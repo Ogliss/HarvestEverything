@@ -1559,7 +1559,6 @@
 		<li Class="PatchOperationConditional">
 			<xpath>/Defs/BodyPartDef[defName="Stomach"]/spawnThingOnRemoved</xpath>
 			<!--success>Always</success-->
-			
 			<match Class="PatchOperationAdd">
 				<success>Always</success>
 				<xpath>/Defs/BodyPartDef[defName="Stomach"]</xpath>
@@ -1571,7 +1570,6 @@
 				  </modExtensions>
 				</value>
 			</match>
-			
 			<nomatch Class="PatchOperationAdd">
 				<xpath>/Defs/BodyPartDef[defName="Stomach"]</xpath>
 				<value>
@@ -2031,7 +2029,7 @@
 						<label>brain</label>
 						<description>A biological human brain. The center of all Consciousness.</description>
 						<statBases>
-						  <MarketValue>1500</MarketValue>
+						  <MarketValue>900</MarketValue>
 						  <Mass>1</Mass>
 						</statBases>
 					  </ThingDef>
