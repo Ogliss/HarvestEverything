@@ -1989,6 +1989,12 @@
     <success>Always</success>
     <operations>
 		<li Class="PatchOperationConditional">
+			<xpath>/Defs/BodyPartDef[defName="Brain"]/spawnThingOnRemoved[position()>1]</xpath>
+			<match Class="PatchOperationRemove">
+				<xpath>/Defs/BodyPartDef[defName="Brain"]/spawnThingOnRemoved[position()>1]</xpath>
+			</match>
+		</li>
+		<li Class="PatchOperationConditional">
 			<xpath>/Defs/BodyPartDef[defName="Brain"]/spawnThingOnRemoved</xpath>
 			<!--success>Always</success-->
 			
