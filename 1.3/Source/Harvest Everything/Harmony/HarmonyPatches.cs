@@ -26,24 +26,24 @@ namespace Harvest_Everything
             bool flag = method2 == null;
             if (flag)
             {
-                Log.Error("RemoveBodyPart Postfix is null", false);
+                Log.Error("RemoveBodyPart Postfix is null");
             }
             bool flag2 = harmony.Patch(method, null, new HarmonyMethod(method2)) == null;
             if (flag2)
             {
-                Log.Error("Harvest Everything RemoveBodyPart patch failed.", false);
+                Log.Error("Harvest Everything RemoveBodyPart patch failed.");
             }
             MethodInfo method3 = AccessTools.TypeByName("RimWorld.Recipe_RemoveImplant").GetMethod("GetPartsToApplyOn");
             MethodInfo method4 = typeof(Recipe_RemoveImplant_GetPartsToApplyOn_Patch).GetMethod("Postfix");
             bool flag3 = method4 == null;
             if (flag3)
             {
-                Log.Error("RemoveImplant Postfix is null", false);
+                Log.Error("RemoveImplant Postfix is null");
             }
             bool flag4 = harmony.Patch(method3, null, new HarmonyMethod(method4)) == null;
             if (flag4)
             {
-                Log.Error("Harvest Everything RemoveImplant patch failed.", false);
+                Log.Error("Harvest Everything RemoveImplant patch failed.");
             }
             if (!enabled_QuestionableEthics)
             {
@@ -52,12 +52,12 @@ namespace Harvest_Everything
                 bool flag5 = method6 == null;
                 if (flag5)
                 {
-                    Log.Error("InstallNaturalBodyPart Postfix is null", false);
+                    Log.Error("InstallNaturalBodyPart Postfix is null");
                 }
                 bool flag6 = harmony.Patch(method5, null, new HarmonyMethod(method6)) == null;
                 if (flag6)
                 {
-                    Log.Error("Harvest Everything InstallNaturalBodyPart patch failed.", false);
+                    Log.Error("Harvest Everything InstallNaturalBodyPart patch failed.");
                 }
             }
             else
@@ -65,7 +65,7 @@ namespace Harvest_Everything
                 Log.Message("QEE deteched");
             }
             harmony.PatchAll(Assembly.GetExecutingAssembly());
-            if (Prefs.DevMode) Log.Message(string.Format("Harvest Everything: successfully completed {0} harmony patches.", harmony.GetPatchedMethods().Select(new Func<MethodBase, Patches>(Harmony.GetPatchInfo)).SelectMany((Patches p) => p.Prefixes.Concat(p.Postfixes).Concat(p.Transpilers)).Count((Patch p) => p.owner.Contains(harmony.Id))), false);
+            if (Prefs.DevMode) Log.Message(string.Format("Harvest Everything: successfully completed {0} harmony patches.", harmony.GetPatchedMethods().Select(new Func<MethodBase, Patches>(Harmony.GetPatchInfo)).SelectMany((Patches p) => p.Prefixes.Concat(p.Postfixes).Concat(p.Transpilers)).Count((Patch p) => p.owner.Contains(harmony.Id))));
         }
 
         public static bool HasAmputateableFor(Pawn pawn, BodyPartRecord part)

@@ -16,8 +16,7 @@ namespace Harvest_Everything
         {
             foreach (BodyPartRecord part in __result)
             {
-                bool flag = !HarmonyPatches.IsChildrenDamaged(pawn, part);
-                if (flag)
+                if (!HarmonyPatches.IsChildrenDamaged(pawn, part))
                 {
                     continue;
                 }
@@ -27,8 +26,7 @@ namespace Harvest_Everything
             IEnumerable<BodyPartRecord> notMissingParts = pawn.health.hediffSet.GetNotMissingParts(BodyPartHeight.Undefined, BodyPartDepth.Undefined, null, null).Where(x => x.def.spawnThingOnRemoved != null && recipe.appliedOnFixedBodyParts.Contains(x.def));
             foreach (BodyPartRecord part in notMissingParts)
             {
-                bool flag = !HarmonyPatches.IsChildrenDamaged(pawn, part);
-                if (flag || __result.Contains(part))
+                if (!HarmonyPatches.IsChildrenDamaged(pawn, part))
                 {
                     continue;
                 }

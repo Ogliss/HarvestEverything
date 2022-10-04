@@ -11,7 +11,7 @@ namespace Harvest_Everything
 {
     public class Recipe_RemoveBodyPart_GetPartsToApplyOn_Patch
     {
-        public static IEnumerable<BodyPartRecord> Postfix(IEnumerable<BodyPartRecord> __result, Pawn pawn, RecipeDef recipe) 
+        public static IEnumerable<BodyPartRecord> Postfix(IEnumerable<BodyPartRecord> __result, Pawn pawn) 
         {
             foreach (BodyPartRecord part in __result)
             {
@@ -33,7 +33,7 @@ namespace Harvest_Everything
                     }
                 }
                 else 
-                if (part.def.spawnThingOnRemoved != null)
+                if (part.def.spawnThingOnRemoved != null || part.def.forceAlwaysRemovable)
                 {
                     yield return part;
                 }
