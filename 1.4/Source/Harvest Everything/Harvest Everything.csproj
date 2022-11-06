@@ -28,7 +28,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\Assemblies\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -37,11 +37,13 @@
   <PropertyGroup>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <None Include="HEMod.cs.bak" />
     <None Include="Settings.cs.bak" />
     <None Include="SettingsHelper.cs.bak" />
+    <Compile Include="Harmony\Patches\Recipe_HealthCardUtility_CreateSurgeryBilln_Patch.cs" />
     <Compile Include="Harmony\Patches\Recipe_InstallNaturalBodyPart_GetPartsToApplyOn_Patch.cs" />
     <Compile Include="Harmony\Patches\Recipe_RemoveImplant_GetPartsToApplyOn_Patch.cs" />
     <Compile Include="Harmony\Patches\Recipe_RemoveBodyPart_GetPartsToApplyOn_Patch.cs" />
